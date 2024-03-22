@@ -1,4 +1,4 @@
-"""Snake, classic arcade game.
+https://github.com/AvelDominguez101/actividad2.git"""Snake, classic arcade game.
 
 Exercises
 
@@ -10,8 +10,12 @@ Exercises
 
 from random import randrange
 from turtle import *
-
 from freegames import square, vector
+
+# A01655625-Avel  Seleccionar colores aleatorios para la serpiente y la comida, asegurándose de que sean diferentes
+snake_color = choice(colors)
+food_color = choice([color for color in colors if color != snake_color])
+
 
 food = vector(0, 0)
 snake = [vector(10, 0)]
@@ -28,6 +32,22 @@ def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
 
+
+
+
+
+# Nueva función para mover la comida aleatoriamente
+def move_food():
+    
+    directions = [(10, 0), (-10, 0), (0, 10), (0, -10)]  # posibles movimientos
+    move = choice(directions)  # elegir un movimiento aleatorio
+    new_x = food.x + move[0]
+    new_y = food.y + move[1]
+
+    # Asegurar que la comida no salga de los límites
+    if -200 < new_x < 190 and -200 < new_y < 190:
+        food.x = new_x
+        food.y = new_y
 
 def move():
     """Move snake forward one segment."""
@@ -62,6 +82,7 @@ setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
+
 onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
